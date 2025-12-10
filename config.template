@@ -1,0 +1,122 @@
+# OpenWrt/ImmortalWrt Configuration Template for ZBT Z8102AX-V2 eMMC
+# 
+# This is a minimal diffconfig that can be used with:
+#   cp config.template .config
+#   make defconfig
+#
+# Target System
+CONFIG_TARGET_mediatek=y
+CONFIG_TARGET_mediatek_filogic=y
+CONFIG_TARGET_mediatek_filogic_DEVICE_zbtlink_z8102ax-v2-emmc=y
+
+# Base system
+CONFIG_PACKAGE_base-files=y
+CONFIG_PACKAGE_busybox=y
+CONFIG_PACKAGE_ca-bundle=y
+CONFIG_PACKAGE_dnsmasq=y
+CONFIG_PACKAGE_dropbear=y
+CONFIG_PACKAGE_firewall4=y
+CONFIG_PACKAGE_kmod-nft-offload=y
+CONFIG_PACKAGE_nftables=y
+CONFIG_PACKAGE_odhcp6c=y
+CONFIG_PACKAGE_odhcpd-ipv6only=y
+CONFIG_PACKAGE_opkg=y
+CONFIG_PACKAGE_ppp=y
+CONFIG_PACKAGE_ppp-mod-pppoe=y
+CONFIG_PACKAGE_uci=y
+CONFIG_PACKAGE_uclient-fetch=y
+
+# WiFi support
+CONFIG_PACKAGE_kmod-mt7915e=y
+CONFIG_PACKAGE_kmod-mt7981-firmware=y
+CONFIG_PACKAGE_mt7981-wo-firmware=y
+CONFIG_PACKAGE_hostapd-common=y
+CONFIG_PACKAGE_wpad-basic-mbedtls=y
+
+# USB support
+CONFIG_PACKAGE_kmod-usb-core=y
+CONFIG_PACKAGE_kmod-usb2=y
+CONFIG_PACKAGE_kmod-usb3=y
+CONFIG_PACKAGE_kmod-usb-storage=y
+CONFIG_PACKAGE_kmod-usb-storage-uas=y
+
+# File system support
+CONFIG_PACKAGE_kmod-fs-ext4=y
+CONFIG_PACKAGE_kmod-fs-f2fs=y
+CONFIG_PACKAGE_kmod-fs-vfat=y
+CONFIG_PACKAGE_e2fsprogs=y
+CONFIG_PACKAGE_f2fsck=y
+CONFIG_PACKAGE_mkf2fs=y
+
+# eMMC/MMC support
+CONFIG_PACKAGE_kmod-mmc=y
+CONFIG_PACKAGE_kmod-mmc-mtk=y
+
+# LuCI Web Interface (optional, uncomment to enable)
+# CONFIG_PACKAGE_luci=y
+# CONFIG_PACKAGE_luci-ssl=y
+# CONFIG_PACKAGE_luci-app-firewall=y
+# CONFIG_PACKAGE_luci-app-opkg=y
+# CONFIG_PACKAGE_luci-proto-ipv6=y
+# CONFIG_PACKAGE_luci-proto-ppp=y
+
+# Network utilities
+CONFIG_PACKAGE_ip-full=y
+CONFIG_PACKAGE_ipset=y
+CONFIG_PACKAGE_iptables=y
+CONFIG_PACKAGE_iptables-mod-extra=y
+CONFIG_PACKAGE_iptables-mod-filter=y
+CONFIG_PACKAGE_iptables-mod-ipopt=y
+
+# System utilities
+CONFIG_PACKAGE_fdisk=y
+CONFIG_PACKAGE_lsblk=y
+CONFIG_PACKAGE_htop=y
+
+# Kernel options for eMMC
+CONFIG_MMC=y
+CONFIG_MMC_BLOCK=y
+CONFIG_MMC_MTK=y
+
+# Image options
+CONFIG_TARGET_ROOTFS_SQUASHFS=y
+CONFIG_TARGET_SQUASHFS_BLOCK_SIZE=256
+CONFIG_TARGET_UBIFS_FREE_SPACE_FIXUP=y
+CONFIG_TARGET_UBIFS_JOURNAL_SIZE=""
+
+# Advanced options (uncomment if needed)
+# Docker support
+# CONFIG_PACKAGE_docker=y
+# CONFIG_PACKAGE_dockerd=y
+# CONFIG_PACKAGE_docker-compose=y
+# CONFIG_PACKAGE_kmod-br-netfilter=y
+# CONFIG_PACKAGE_kmod-ikconfig=y
+# CONFIG_PACKAGE_kmod-veth=y
+
+# VPN support
+# CONFIG_PACKAGE_openvpn-openssl=y
+# CONFIG_PACKAGE_wireguard-tools=y
+# CONFIG_PACKAGE_kmod-wireguard=y
+
+# 4G/LTE support
+# CONFIG_PACKAGE_kmod-usb-net=y
+# CONFIG_PACKAGE_kmod-usb-net-cdc-ether=y
+# CONFIG_PACKAGE_kmod-usb-net-cdc-mbim=y
+# CONFIG_PACKAGE_kmod-usb-net-cdc-ncm=y
+# CONFIG_PACKAGE_kmod-usb-net-qmi-wwan=y
+# CONFIG_PACKAGE_kmod-usb-net-rndis=y
+# CONFIG_PACKAGE_kmod-usb-serial=y
+# CONFIG_PACKAGE_kmod-usb-serial-option=y
+# CONFIG_PACKAGE_kmod-usb-serial-wwan=y
+# CONFIG_PACKAGE_usb-modeswitch=y
+# CONFIG_PACKAGE_comgt=y
+
+# Additional file systems
+# CONFIG_PACKAGE_kmod-fs-ntfs3=y
+# CONFIG_PACKAGE_ntfs-3g=y
+
+# Network monitoring
+# CONFIG_PACKAGE_tcpdump=y
+# CONFIG_PACKAGE_iperf3=y
+# CONFIG_PACKAGE_mtr=y
+# CONFIG_PACKAGE_ethtool=y

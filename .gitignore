@@ -1,0 +1,42 @@
+# Build artifacts
+*.o
+*.a
+*.so
+*.ko
+*.bin
+*.img
+*.dtb
+*.elf
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Backup files
+*.bak
+*.orig
+*.backup
+
+# Logs
+*.log
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-*
+.project
+.cproject
+.settings/
+
+# Build directories (if building in repo)
+bin/
+build_dir/
+staging_dir/
+tmp/
+dl/
+feeds/
+.config
+.config.old
