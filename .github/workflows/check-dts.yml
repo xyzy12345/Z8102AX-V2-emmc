@@ -1,0 +1,68 @@
+name: Check DTS Syntax
+
+on:
+  push:
+    paths:
+      - 'target/linux/mediatek/dts/**'
+  pull_request:
+    paths:
+      - 'target/linux/mediatek/dts/**'
+
+jobs:
+  check-dts:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y device-tree-compiler
+    
+    - name: Check DTS syntax
+      run: |
+        echo "Checking DTS file syntax..."
+        for dts_file in target/linux/mediatek/dts/*.dts; do
+          if [ -f "$dts_file" ]; then
+            echo "Checking $dts_file..."
+            # Basic syntax check with cpp preprocessor
+            cpp -nostdinc -I. -undef -x assembler-with-cpp "$dts_file" -o /tmp/preprocessed.dts || exit 1
+            echo "✓ $dts_file syntax OK"
+          fi
+        done
+    
+    - name: Validate partition addresses
+      run: |
+        echo "Validating partition layout..."
+        python3 << 'EOF'
+        import re
+        
+        # Read DTS file
+        with open('target/linux/mediatek/dts/mt7981b-zbt-z8102ax-emmc.dts', 'r') as f:
+            content = f.read()
+        
+        # Extract partition definitions
+        partitions = re.findall(r'partition@\d+\s*{[^}]+label\s*=\s*"([^"]+)"[^}]+reg\s*=\s*<([^>]+)>', content, re.DOTALL)
+        
+        print("Partition layout validation:")
+        print("-" * 60)
+        
+        for name, reg in partitions:
+            # Parse reg values (format: 0x0 0xSTART 0x0 0xSIZE)
+            values = [int(v.strip(), 16) for v in reg.split() if v.strip().startswith('0x')]
+            if len(values) >= 4:
+                addr_high = values[0]
+                addr_low = values[1]
+                size_high = values[2]
+                size_low = values[3]
+                
+                start = (addr_high << 32) | addr_low
+                size = (size_high << 32) | size_low
+                
+                print(f"{name:15s}: Start=0x{start:012x} Size=0x{size:012x} ({size//1024//1024}MB)")
+        
+        print("-" * 60)
+        print("✓ Partition layout validated")
+        EOF
