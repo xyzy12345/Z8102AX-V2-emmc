@@ -245,47 +245,47 @@
 		/* Partition 1: GPT header / Preloader (17K) */
 		partition@0 {
 			label = "gpt";
-			reg = <0x0 0x0 0x0 0x4400>;  // 0 sectors * 512 = 0x0, size 34 sectors * 512 = 0x4400
+			reg = <0x0 0x0 0x0 0x4400>;  // Start: sector 0, Size: 34 sectors
 			read-only;
 		};
 
 		/* Partition 2: ARM Trusted Firmware / BL2 (512K) */
 		partition@1 {
 			label = "bl2";
-			reg = <0x0 0x100000 0x0 0x80000>;  // 8192 sectors * 512 = 0x100000, size 1024 sectors * 512 = 0x80000
+			reg = <0x0 0x400000 0x0 0x80000>;  // Start: sector 8192, Size: 1024 sectors
 			read-only;
 		};
 
 		/* Partition 3: U-Boot environment (2M) */
 		partition@2 {
 			label = "u-boot-env";
-			reg = <0x0 0x120000 0x0 0x200000>;  // 9216 sectors * 512 = 0x120000, size 4096 sectors * 512 = 0x200000
+			reg = <0x0 0x480000 0x0 0x200000>;  // Start: sector 9216, Size: 4096 sectors
 		};
 
 		/* Partition 4: Factory data / calibration (2M) */
 		partition@3 {
 			label = "factory";
-			reg = <0x0 0x1A0000 0x0 0x200000>;  // 13312 sectors * 512 = 0x1A0000, size 4096 sectors * 512 = 0x200000
+			reg = <0x0 0x680000 0x0 0x200000>;  // Start: sector 13312, Size: 4096 sectors
 			read-only;
 		};
 
 		/* Partition 5: FIP / U-Boot / Kernel (32M) */
 		partition@4 {
 			label = "fip";
-			reg = <0x0 0x220000 0x0 0x2000000>;  // 17408 sectors * 512 = 0x220000, size 65536 sectors * 512 = 0x2000000
+			reg = <0x0 0x880000 0x0 0x2000000>;  // Start: sector 17408, Size: 65536 sectors
 			read-only;
 		};
 
 		/* Partition 6: Root filesystem / System (7G) */
 		partition@5 {
 			label = "ubi";
-			reg = <0x0 0xa200000 0x1 0xbd800000>;  // 82944 sectors * 512 = 0xa200000, size 14597121 sectors * 512 = 0x1bd800200
+			reg = <0x0 0x2880000 0x1 0xbd780200>;  // Start: sector 82944, Size: 14597121 sectors
 		};
 
 		/* Partition 7: User data / opt (105G) */
 		partition@6 {
 			label = "opt";
-			reg = <0x1 0xc0a00200 0x1a 0x40000000>;  // 14680065 sectors * 512 = 0x1c0a00200, size 220200960 sectors * 512 = 0x1a40000000
+			reg = <0x1 0xc0000200 0x1a 0x40000000>;  // Start: sector 14680065, Size: 220200960 sectors
 		};
 	};
 };
